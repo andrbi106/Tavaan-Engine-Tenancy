@@ -2,35 +2,28 @@
 
 declare(strict_types=1);
 
-/*|--------------------------------------------------------------------------
- | Tenancy Engine Configuration
- |--------------------------------------------------------------------------
- |
- | پیکربندی موتور tenancy — همهٔ کلیدهای مستندشده در `docs/03-engines/tenancy.md` بخش «پیکربندی».
- |
- |@see https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/tenancy.md
- */
-
 return [
-    /*| پیش‌فرض موتور (driver/store یا حالت فعال) */
-    'default' => env('TENANCY_DEFAULT', 'default'),
+    /*| استراتژی: shared | per_db | per_schema */
+    'strategy' => \getenv('TVN_TENANCY_STRATEGY') !== false ? \getenv('TVN_TENANCY_STRATEGY') : 'shared',
 
-    /*| کلید کش (در صورت استفاده) */
-    'prefix' => env('TENANCY_PREFIX', 'tenancy:'),
+    /*| دامنه‌ی پایه برای subdomain resolution */
+    'base_domain' => \getenv('TVN_TENANCY_BASE_DOMAIN') !== false ? \getenv('TVN_TENANCY_BASE_DOMAIN') : 'example.com',
 
-    /*| تنظیمات لاگ */
-    'log' => [
-        'channel' => env('TENANCY_LOG_CHANNEL', 'tenancy'),
+    /*| tenant‌های پیش‌فرض (در startup) */
+    'default_tenants' => [],
+
+    /*| Resolver chain: order matters */
+    'resolvers' => ['domain', 'header', 'path'],
+
+    /*| تنظیمات resolvers */
+    'resolver_config' => [
+        'header_name' => 'X-Tenant-ID',
+        'path_segment' => 1,
     ],
 
-    /*| Facade */
-    'facade' => [
-        'name' => 'Tenant',
-        'accessor' => 'tenant',
-    ],
-
-    /*| سایر کلیدها (طبق مستندات) */
-    'options' => [
-        // TODO: کلیدهای اضافی طبق سند §۶ (پیکربندی)
+    /*| تنظیمات quota پیش‌فرض */
+    'default_quota' => [
+        'orders_per_day' => 1000,
+        'storage_mb' => 1024,
     ],
 ];

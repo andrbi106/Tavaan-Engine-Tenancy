@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-/*| پیام‌های en برای موتور tenancy */
-
 return [
-    'error_default' => 'Unknown error (tenancy)',
-    'not_configured' => 'Engine not configured (tenancy)',
+    'error_not_found' => 'Tenant "{0}" not found.',
+    'error_no_context' => 'No active tenant context set.',
 ];

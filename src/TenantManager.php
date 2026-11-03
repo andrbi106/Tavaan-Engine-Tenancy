@@ -4,83 +4,87 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Config\RepositoryInterface as Config;
+use Tavaan\Engine\Tenancy\Contracts\TenantRepositoryInterface;
 
 /**
- * TenantManager — پیاده‌سازی اصلی موتور.
- *
- * @see \Tavaan\Engine\Tenancy\Contracts\TenantManagerInterface
+ * TenantManager — مدیریت tenantهای موجود و context جاری.
  */
-final class TenantManager implements Contracts\TenantManagerInterface
+final class TenantManager
 {
     /**
-     * @param Config $config پیکربندی موتور
+     * @param array<string, mixed> $config
      */
     public function __construct(
-        private readonly Config $config,
+        private readonly array $config = [],
+        private ?TenantRepositoryInterface $repository = null,
     ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function current(/* ... */): mixed
+    public function setRepository(TenantRepositoryInterface $repository): self
     {
-        // TODO: پیاده‌سازی current مطابق مستندات (سند §3 API).
-        return null;
+        $this->repository = $repository;
+        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function id(/* ... */): mixed
+    public function current(): ?Tenant
     {
-        // TODO: پیاده‌سازی id مطابق مستندات (سند §3 API).
-        return null;
+        return TenantContext::current();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function identifier(/* ... */): mixed
+    public function id(): int|string|null
     {
-        // TODO: پیاده‌سازی identifier مطابق مستندات (سند §3 API).
-        return null;
+        return TenantContext::current()?->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function run(/* ... */): mixed
+    public function identifier(): ?string
     {
-        // TODO: پیاده‌سازی run مطابق مستندات (سند §3 API).
-        return null;
+        return TenantContext::current()?->identifier;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function withoutCurrentScope(/* ... */): mixed
+    public function setCurrent(Tenant $tenant): self
     {
-        // TODO: پیاده‌سازی withoutCurrentScope مطابق مستندات (سند §3 API).
-        return null;
+        TenantContext::setCurrent($tenant);
+        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function create(/* ... */): mixed
+    public function clear(): self
     {
-        // TODO: پیاده‌سازی create مطابق مستندات (سند §3 API).
-        return null;
+        TenantContext::clear();
+        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function findByDomain(/* ... */): mixed
+    public function run(Tenant $tenant, \Closure $callback): mixed
     {
-        // TODO: پیاده‌سازی findByDomain مطابق مستندات (سند §3 API).
-        return null;
+        return TenantContext::run($tenant, $callback);
+    }
+
+    public function withoutCurrent(\Closure $callback): mixed
+    {
+        return TenantContext::withoutCurrent($callback);
+    }
+
+    public function find(int|string $id): ?Tenant
+    {
+        return $this->repository?->find($id);
+    }
+
+    public function findByIdentifier(string $identifier): ?Tenant
+    {
+        return $this->repository?->findByIdentifier($identifier);
+    }
+
+    public function findByDomain(string $domain): ?Tenant
+    {
+        return $this->repository?->findByDomain($domain);
+    }
+
+    public function create(array $data): ?Tenant
+    {
+        return $this->repository?->create($data);
+    }
+
+    public function quota(string $resource): mixed
+    {
+        return TenantContext::current()?->quotaOf($resource);
     }
 }

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-/*| پیام‌های fa برای موتور tenancy */
-
 return [
-    'error_default' => 'خطای ناشناخته (tenancy)',
-    'not_configured' => 'موتور پیکربندی نشده است (tenancy)',
+    'error_not_found' => 'tenant «{0}» یافت نشد.',
+    'error_no_context' => 'هیچ tenant فعالی تنظیم نشده است.',
 ];
