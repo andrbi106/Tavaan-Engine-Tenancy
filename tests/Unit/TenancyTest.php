@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tavaan\Testing\TestCase;
 use Tavaan\Engine\Tenancy\Tenant;
 use Tavaan\Engine\Tenancy\TenantContext;
 use Tavaan\Engine\Tenancy\TenantManager;
