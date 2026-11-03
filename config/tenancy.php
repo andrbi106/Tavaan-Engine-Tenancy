@@ -2,63 +2,35 @@
 
 declare(strict_types=1);
 
-/*
- * تَوان | Tavaan — Tenancy
- * config/tenancy.php — پیکربندی چنداجاره‌ای (DOC-082E §10 / DOC-028).
+/*|--------------------------------------------------------------------------
+ | Tenancy Engine Configuration
+ |--------------------------------------------------------------------------
+ |
+ | پیکربندی موتور tenancy — همهٔ کلیدهای مستندشده در `docs/03-engines/tenancy.md` بخش «پیکربندی».
+ |
+ |@see https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/tenancy.md
  */
 
 return [
-    'enabled' => env_bool('TVN_TENANCY', false),
+    /*| پیش‌فرض موتور (driver/store یا حالت فعال) */
+    'default' => env('TENANCY_DEFAULT', 'default'),
 
-    // shared|database|schema
-    'strategy' => env_string('TVN_TENANCY_STRATEGY', 'shared'),
+    /*| کلید کش (در صورت استفاده) */
+    'prefix' => env('TENANCY_PREFIX', 'tenancy:'),
 
-    // اتصال DB مرکزی (خالی = اتصال پیش‌فرض database)
-    'central_connection' => env_string('TVN_TENANCY_CENTRAL', ''),
-
-    // قالب اتصال tenant در استراتژی B (خالی = کپی از اتصال مرکزی)
-    'tenant_template' => '',
-
-    // مسیر فایل‌های sqlite در استراتژی B
-    'sqlite_path' => storage_path('tenants'),
-
-    // پیشوند schema در استراتژی C
-    'schema_prefix' => 'tenant_',
-
-    // کلاس مدل tenant (باید از Tavaan\Engine\Tenancy\Tenant ارث ببرد)
-    'tenant_model' => \Tavaan\Engine\Tenancy\Tenant::class,
-
-    // جدول ثبت tenantها
-    'table' => 'tvn_tenants',
-
-    // زنجیرهٔ resolverها به ترتیب اولویت
-    'resolver' => ['domain', 'header', 'path', 'token'],
-
-    // تنظیمات resolverها
-    'resolvers' => [
-        'domain_suffix' => env_string('TVN_TENANT_DOMAIN', ''),   // مثلاً .example.com
-        'header' => 'X-Tenant-Id',
-        'path_prefix' => 't',
-        'query_param' => 'tenant',
-        'query_dev_only' => true,
-        'token_claim' => 'tenant_id',
-        'token_decode_unverified' => false,
-        'default_tenant' => env_string('TVN_TENANT_DEFAULT', ''),
+    /*| تنظیمات لاگ */
+    'log' => [
+        'channel' => env('TENANCY_LOG_CHANNEL', 'tenancy'),
     ],
 
-    'tenant_column' => 'tenant_id',
-
-    // جداول سراسری (بدون scope)
-    'ignore_tables' => ['tvn_tenants', 'tvn_migrations', 'users'],
-
-    'quota' => [
-        'enabled' => true,
-        'defaults' => [],
+    /*| Facade */
+    'facade' => [
+        'name' => 'Tenant',
+        'accessor' => 'tenant',
     ],
 
-    // جداکردن کلیدهای cache با prefix tenant (tvn:t{id}:)
-    'isolate_cache' => true,
-
-    // میان‌بر مسیر فایل tenant: storage/tenants/{identifier}/
-    'storage_path' => storage_path('tenants'),
+    /*| سایر کلیدها (طبق مستندات) */
+    'options' => [
+        // TODO: کلیدهای اضافی طبق سند §۶ (پیکربندی)
+    ],
 ];
