@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Config\RepositoryInterface as ConfigRepository;
+use Tavaan\Engine\Config\Contracts\RepositoryInterface as ConfigRepository;
 use Tavaan\Core\Contracts\Container\ContainerInterface;
 use Tavaan\Core\Contracts\Events\DispatcherInterface;
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 use Tavaan\Engine\Tenancy\Events\TenantConnected;
 use Tavaan\Engine\Tenancy\Exceptions\TenancyException;
 

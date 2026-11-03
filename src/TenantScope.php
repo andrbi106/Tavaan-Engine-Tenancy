@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Database\QueryBuilderInterface;
-use Tavaan\Core\Contracts\ORM\ModelInterface;
-use Tavaan\Core\Contracts\ORM\ScopeInterface;
+use Tavaan\Engine\Database\Contracts\QueryBuilderInterface;
+use Tavaan\Engine\Database\ORM\Contracts\ModelInterface;
+use Tavaan\Engine\Database\ORM\Contracts\ScopeInterface;
 use Tavaan\Engine\Tenancy\Exceptions\TenantNotResolvedException;
 
 /**

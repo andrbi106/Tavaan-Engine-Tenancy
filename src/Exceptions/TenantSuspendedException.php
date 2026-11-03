@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy\Exceptions;
 
-use Tavaan\Core\Exceptions\Http\HttpException;
+use Tavaan\Engine\Http\Exceptions\HttpException;
 
 /**
  * تَوان | Tavaan — Tenancy

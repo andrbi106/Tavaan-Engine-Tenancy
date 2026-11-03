@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tavaan\Engine\Tenancy;
 
 use Tavaan\Core\Contracts\Container\ContainerInterface;
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 use Tavaan\Engine\Tenancy\Exceptions\TenancyException;
 
 /**

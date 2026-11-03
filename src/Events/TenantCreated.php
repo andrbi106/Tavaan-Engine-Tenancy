@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy\Events;
 
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 
 /**
  * تَوان | Tavaan — Tenancy

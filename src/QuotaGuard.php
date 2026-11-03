@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Cache\RepositoryInterface as CacheRepository;
+use Tavaan\Engine\Cache\Contracts\RepositoryInterface as CacheRepository;
 use Tavaan\Core\Contracts\Events\DispatcherInterface;
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 use Tavaan\Engine\Tenancy\Events\TenantQuotaExceeded;
 use Tavaan\Engine\Tenancy\Exceptions\TenantNotResolvedException;
 use Tavaan\Engine\Tenancy\Exceptions\TenantQuotaExceededException;

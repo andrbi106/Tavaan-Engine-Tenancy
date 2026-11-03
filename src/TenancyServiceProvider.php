@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Cache\RepositoryInterface as CacheRepository;
-use Tavaan\Core\Contracts\Config\RepositoryInterface as ConfigRepository;
+use Tavaan\Engine\Cache\Contracts\RepositoryInterface as CacheRepository;
+use Tavaan\Engine\Config\Contracts\RepositoryInterface as ConfigRepository;
 use Tavaan\Core\Contracts\Container\ContainerInterface;
 use Tavaan\Core\Contracts\Events\DispatcherInterface;
-use Tavaan\Core\Contracts\Tenancy\TenantResolverInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantResolverInterface;
 use Tavaan\Core\Provider\ServiceProvider;
 use Tavaan\Engine\Tenancy\Middleware\IdentifyTenantMiddleware;
 use Tavaan\Engine\Tenancy\Resolvers\DefaultResolver;
@@ -189,13 +189,13 @@ final class TenancyServiceProvider extends ServiceProvider
         }
 
         $app = $this->app;
-        $cacheManager->extend('tenant', static function (array $config) use ($app): \Tavaan\Core\Contracts\Cache\StoreInterface {
+        $cacheManager->extend('tenant', static function (array $config) use ($app): \Tavaan\Engine\Cache\Contracts\StoreInterface {
             $innerStore = isset($config['store']) && \is_string($config['store']) && $config['store'] !== ''
                 ? $config['store']
                 : null;
             /** @var \Tavaan\Engine\Cache\CacheManager $manager */
             $manager = $app->make('cache');
-            /** @var \Tavaan\Core\Contracts\Cache\RepositoryInterface $innerRepo */
+            /** @var \Tavaan\Engine\Cache\Contracts\RepositoryInterface $innerRepo */
             $innerRepo = $manager->store($innerStore);
 
             return new TenantScopeStore($innerRepo->getStore());

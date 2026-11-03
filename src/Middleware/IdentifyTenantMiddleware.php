@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy\Middleware;
 
-use Tavaan\Core\Contracts\Http\MiddlewareInterface;
-use Tavaan\Core\Contracts\Http\RequestInterface;
-use Tavaan\Core\Contracts\Http\ResponseInterface;
-use Tavaan\Core\Contracts\Http\TerminableMiddleware;
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Http\Contracts\MiddlewareInterface;
+use Tavaan\Engine\Http\Contracts\RequestInterface;
+use Tavaan\Engine\Http\Contracts\ResponseInterface;
+use Tavaan\Engine\Http\Contracts\TerminableMiddleware;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 use Tavaan\Engine\Http\Request;
 use Tavaan\Engine\Tenancy\TenantContext;
 use Tavaan\Engine\Tenancy\TenantManager;

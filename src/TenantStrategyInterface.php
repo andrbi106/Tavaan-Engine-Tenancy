@@ -14,16 +14,16 @@ namespace Tavaan\Engine\Tenancy;
 interface TenantStrategyInterface
 {
     /** برقراری اتصال/زمینه برای tenant. */
-    public function connect(\Tavaan\Core\Contracts\Tenancy\TenantInterface $tenant): void;
+    public function connect(\Tavaan\Engine\Tenancy\Contracts\TenantInterface $tenant): void;
 
     /** بازگشت به حالت مرکزی. */
     public function disconnect(): void;
 
     /** ساخت فضای دادهٔ tenant (DB یا Schema). */
-    public function provision(\Tavaan\Core\Contracts\Tenancy\TenantInterface $tenant): void;
+    public function provision(\Tavaan\Engine\Tenancy\Contracts\TenantInterface $tenant): void;
 
     /** حذف فضای دادهٔ tenant. */
-    public function deprovision(\Tavaan\Core\Contracts\Tenancy\TenantInterface $tenant): void;
+    public function deprovision(\Tavaan\Engine\Tenancy\Contracts\TenantInterface $tenant): void;
 
     public function name(): string;
 }

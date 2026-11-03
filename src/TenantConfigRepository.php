@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy;
 
-use Tavaan\Core\Contracts\Config\RepositoryInterface as ConfigRepository;
-use Tavaan\Core\Contracts\Tenancy\TenantInterface;
+use Tavaan\Engine\Config\Contracts\RepositoryInterface as ConfigRepository;
+use Tavaan\Engine\Tenancy\Contracts\TenantInterface;
 
 /**
  * تَوان | Tavaan — Tenancy

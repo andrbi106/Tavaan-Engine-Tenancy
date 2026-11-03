@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Tenancy\Resolvers;
 
-use Tavaan\Core\Contracts\Http\RequestInterface;
-use Tavaan\Core\Contracts\Tenancy\TenantResolverInterface;
+use Tavaan\Engine\Http\Contracts\RequestInterface;
+use Tavaan\Engine\Tenancy\Contracts\TenantResolverInterface;
 
 /**
  * تَوان | Tavaan — Tenancy
