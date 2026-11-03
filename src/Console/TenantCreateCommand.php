@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Tenancy\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * tenant:list command.
+ * tenant:create command.
  */
-final class Tenant_listCommand implements CommandInterface
+final class TenantCreateCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'tenant:list';
+        return 'tenant:create';
     }
 
     public function description(): string
     {
-        return 'Run tenant:list (TODO: fill description).';
+        return 'Run tenant:create (TODO: fill description).';
     }
 
     public function handle(array $args = []): int

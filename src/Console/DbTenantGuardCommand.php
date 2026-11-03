@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Tenancy\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * tenant:stats command.
+ * db:tenant-guard command.
  */
-final class Tenant_statsCommand implements CommandInterface
+final class DbTenantGuardCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'tenant:stats';
+        return 'db:tenant-guard';
     }
 
     public function description(): string
     {
-        return 'Run tenant:stats (TODO: fill description).';
+        return 'Run db:tenant-guard (TODO: fill description).';
     }
 
     public function handle(array $args = []): int

@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Tenancy\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * tenant:create command.
+ * tenant:migrate command.
  */
-final class Tenant_createCommand implements CommandInterface
+final class TenantMigrateCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'tenant:create';
+        return 'tenant:migrate';
     }
 
     public function description(): string
     {
-        return 'Run tenant:create (TODO: fill description).';
+        return 'Run tenant:migrate (TODO: fill description).';
     }
 
     public function handle(array $args = []): int

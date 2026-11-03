@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Tenancy\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * tenant:delete command.
+ * tenant:stats command.
  */
-final class Tenant_deleteCommand implements CommandInterface
+final class TenantStatsCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'tenant:delete';
+        return 'tenant:stats';
     }
 
     public function description(): string
     {
-        return 'Run tenant:delete (TODO: fill description).';
+        return 'Run tenant:stats (TODO: fill description).';
     }
 
     public function handle(array $args = []): int
