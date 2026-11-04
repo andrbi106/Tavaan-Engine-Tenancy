@@ -2,6 +2,8 @@
 
 > **چنداجاره‌ای** — موتور Tenancy در فریمورک تَوان
 
+این موتور از کلاس پایهٔ `Engine` (در [Tavaan-Engine-Core](https://github.com/andrbi106/Tavaan-Engine-Core)) ارث می‌برد.
+
 ## مشخصات
 
 | فیلد | مقدار |
@@ -11,85 +13,60 @@
 | عنوان فارسی | چنداجاره‌ای |
 | نسخه | `0.1.0` |
 | namespace | `Tavaan\Engine\Tenancy` |
-| نوع | `engine` |
-| Facade | `Tenant` (accessor: `tenant`) |
+| کلاس موتور | `Tavaan\Engine\Tenancy\TenancyEngine` |
+| Facade | Tenant (`tenant`) |
 
-## قراردادها (Contracts)
+## کلاس موتور
 
-این موتور قراردادهای زیر را ارائه می‌دهد:
+```php
+namespace Tavaan\Engine\Tenancy;
 
-- `Tavaan\Engine\Tenancy\Contracts\TenantInterface`
-- `Tavaan\Engine\Tenancy\Contracts\TenantInterfaces`
-- `Tavaan\Engine\Tenancy\Contracts\TenantResolverInterface`
+use Tavaan\EngineCore\Engine as BaseEngine;
+use Tavaan\EngineCore\Contracts\EngineManifestInterface;
 
-## خطاها (Exceptions)
+final class TenancyEngine extends BaseEngine
+{
+    public function __construct(EngineManifestInterface $manifest)
+    {
+        parent::__construct($manifest);
+    }
 
-- `Tavaan\Engine\Tenancy\Exceptions\TenancyException`
-- `Tavaan\Engine\Tenancy\Exceptions\TenantNotFoundException`
-- `Tavaan\Engine\Tenancy\Exceptions\TenantNotResolvedException`
-- `Tavaan\Engine\Tenancy\Exceptions\TenantQuotaExceededException`
-- `Tavaan\Engine\Tenancy\Exceptions\TenantSuspendedException`
+    public function register(ContainerInterface $container): void
+    {
+        parent::register($container);
+        // bindingهای اختصاصی موتور
+    }
 
-## Facadeها
+    public function boot(): void
+    {
+        parent::boot();
+    }
+}
+```
 
-- `Tavaan\Engine\Tenancy\Facades\Tenant`
+**فایل:** `src/TenancyEngine.php`
 
-## کلاس‌های اصلی
+## وابستگی‌ها
 
-- `src/BelongsToTenant.php`
-- `src/Console/DbTenantGuardCommand.php`
-- `src/Console/TenantCreateCommand.php`
-- `src/Console/TenantDeleteCommand.php`
-- `src/Console/TenantListCommand.php`
-- `src/Console/TenantMigrateCommand.php`
-- `src/Console/TenantQueryGuard.php`
-- `src/Console/TenantStatsCommand.php`
-- `src/DatabaseTenantManager.php`
-- `src/Events/TenantConnected.php`
-- `src/Events/TenantCreated.php`
-- `src/Events/TenantQuotaExceeded.php`
-- `src/Events/TenantResolved.php`
-- `src/InMemoryTenantRepository.php`
-- `src/Middleware/IdentifyTenantMiddleware.php`
-- `src/QuotaGuard.php`
-- `src/Resolvers/DefaultResolver.php`
-- `src/Resolvers/DomainResolver.php`
-- `src/Resolvers/HeaderResolver.php`
-- `src/Resolvers/PathResolver.php`
-- ... و 18 فایل دیگر
+**موتورهای مورد‌نیاز:** `config`
 
 ## Service Providerها
 
 - `Tavaan\Engine\Tenancy\TenantServiceProvider`
 
-## وابستگی‌ها
+## سه درگاه ارتباط با سایر موتورها
 
-**موتورهای مورد‌نیاز:**
-
-- `config`
-
-## پیکربندی
-
-- فایل پیکربندی: `config/tenancy.php`
-- کلید: `tenancy`
+| درگاه | الگو | متدهای convenience |
+|---|---|---|
+| Container | pull-based DI | `make()`, `bound()` |
+| Events | pub/sub | `dispatch()`, `listen()` |
+| EngineBus | point-to-point RPC | `call()`, `offer()` |
 
 ## نصب
 
 ```bash
 git clone https://github.com/andrbi106/Tavaan-Engine-Tenancy.git
 ```
-
-این موتور بخشی از فریمورک تَوان است و معمولاً به‌صورت مستقیم نصب نمی‌شود،
-بلکه توسط [Tavaan-Core](https://github.com/andrbi106/Tavaan-Core) مدیریت می‌شود.
-
-## روابط با سایر مخازن
-
-| مخزن | نقش |
-|---|---|
-| **`andrbi106/Tavaan-Engine-Tenancy`** (این مخزن) | موتور Tenancy |
-| `andrbi106/Tavaan-Engine-Core` | ساختار پایه + درگاه ارتباط موتورها |
-| `andrbi106/Tavaan-Core` | اسکلت اپلیکیشن + همهٔ موتورها |
-| `Derogaramin/Tavaan-Framework` | فریمورک مادر (monorepo) |
 
 ## مجوز
 

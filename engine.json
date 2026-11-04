@@ -15,7 +15,9 @@
   ],
   "requires": {
     "php": ">=8.2",
-    "engines": ["config"]
+    "engines": [
+      "config"
+    ]
   },
   "config": {
     "file": "config/tenancy.php",
@@ -27,5 +29,6 @@
     "name": "Tenant",
     "accessor": "tenant"
   },
-  "docs": "docs/03-engines/tenancy.md"
+  "docs": "docs/03-engines/tenancy.md",
+  "class": "Tavaan\\Engine\\Tenancy\\TenancyEngine"
 }
